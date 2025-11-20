@@ -5,6 +5,6 @@ __pycache__/
 Thumbs.db
 .DS_Store
 node_modules/
-/audio/
 
-# If you plan to add audio files to repo, remove or adjust the /audio/ ignore above.
+# Remove the following line if you want to keep audio files out of the repo
+# /audio/
