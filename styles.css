@@ -63,6 +63,7 @@ body{
   opacity: 0; /* 기본적으로 숨김 */
   transition: opacity 0.2s ease-in-out; /* 부드러운 전환 효과 */
   pointer-events: none; /* 오버레이가 클릭 이벤트를 방해하지 않도록 */
+  z-index: 10; /* 다른 요소 위에 표시되도록 z-index 추가 */
 }
 
 .part.active::after {
