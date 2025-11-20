@@ -1,0 +1,10 @@
+/.vscode/
+/.idea/
+__pycache__/
+*.pyc
+Thumbs.db
+.DS_Store
+node_modules/
+/audio/
+
+# If you plan to add audio files to repo, remove or adjust the /audio/ ignore above.
