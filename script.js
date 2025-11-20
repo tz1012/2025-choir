@@ -64,6 +64,15 @@ function createOrTogglePlayer(btn){
   // when audio ends, remove active state
   audioEl.addEventListener('ended', ()=>{
     btn.classList.remove('active');
+    activeButton = null; // 활성 버튼 초기화
+  });
+
+  // when audio pauses, remove active state
+  audioEl.addEventListener('pause', () => {
+    if (audioEl.currentTime > 0 && !audioEl.ended) { // 재생 중이거나 끝난 것이 아니면 (수동 일시 정지)
+        btn.classList.remove('active');
+        activeButton = null; // 활성 버튼 초기화
+    }
   });
 }
 
