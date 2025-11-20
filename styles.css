@@ -44,6 +44,7 @@ body{
   font-weight:600;
   position: relative; /* 자식 요소의 위치 지정을 위해 추가 */
   overflow: hidden; /* 오버레이가 버튼 경계를 넘지 않도록 */
+  font-size: 1rem; /* 기본 폰트 크기 설정 */
 }
 
 .part::after {
@@ -97,4 +98,7 @@ body{
   .progress{width:100%}
   .player-controls{gap:8px}
   .parts{gap:6px}
+  .part{ /* 모바일 환경에서 버튼 폰트 크기 조정 */
+    font-size: 1.1rem;
+  }
 }
