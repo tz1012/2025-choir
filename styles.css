@@ -94,11 +94,50 @@ body{
 .local-player{margin-top:10px;background:rgba(255,255,255,0.02);padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
 .local-player .error{color:#ffd1d1;font-size:0.95rem;margin-top:6px}
 
+/* 통계 테이블 스타일 */
+.play-stats table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.play-stats th {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 12px;
+  text-align: left;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+}
+
+.play-stats td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.play-stats tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.stats-section {
+  margin-bottom: 2rem;
+}
+
+.stats-section h4 {
+  margin-bottom: 1rem;
+  color: var(--accent);
+}
+
 @media (max-width:640px){
   .progress{width:100%}
   .player-controls{gap:8px}
   .parts{gap:6px}
   .part{ /* 모바일 환경에서 버튼 폰트 크기 조정 */
     font-size: 1.1rem;
+  }
+  
+  .play-stats th,
+  .play-stats td {
+    padding: 8px;
+    font-size: 0.9rem;
   }
 }
