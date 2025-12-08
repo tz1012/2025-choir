@@ -4,12 +4,13 @@ let activeButton = null;
 
 // Firebase 구성 (사용자가 자신의 Firebase 프로젝트 구성으로 교체해야 함)
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyDNGPwze7HnjgGgCKPXtFTk62bfrwrZt6E",
+  authDomain: "choir-a63d6.firebaseapp.com",
+  projectId: "choir-a63d6",
+  storageBucket: "choir-a63d6.firebasestorage.app",
+  messagingSenderId: "798976162474",
+  appId: "1:798976162474:web:f170bb9f9d953d8ba3eed3",
+  measurementId: "G-SV0B6L7VQZ"
 };
 
 // Firebase 초기화
