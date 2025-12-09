@@ -434,7 +434,7 @@ body {
   justify-content: center;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
+  z-index: 9999;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -446,6 +446,8 @@ body {
 .stats-toggle svg {
   width: 24px;
   height: 24px;
+  pointer-events: none;
+  /* 아이콘이 클릭을 가로채지 않도록 */
 }
 
 /* Modal Styles */
