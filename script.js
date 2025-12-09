@@ -198,24 +198,40 @@ function createOrTogglePlayer(btn) {
   // remove previous error messages
   const errEl = container.querySelector('.error'); if (errEl) errEl.remove();
 
+  // 중복 로깅 방지 플래그
+  let hasLogged = false;
+  const LOG_THRESHOLD_SECONDS = 60; // 60초 이상 재생 시 카운트
+
   // try to play, catch CORS / permission errors
   audioEl.play().catch(err => {
     showError(container, err);
     console.warn('재생 실패:', err);
   });
 
-  // when audio ends, remove active state and log play event
+  // 재생 시간 모니터링 (60초 이상 재생 시 카운트)
+  audioEl.addEventListener('timeupdate', () => {
+    if (!hasLogged && audioEl.currentTime >= LOG_THRESHOLD_SECONDS) {
+      logPlayEvent(src);
+      saveLocalCount(src);
+      hasLogged = true;
+      console.log(`Played over ${LOG_THRESHOLD_SECONDS}s, logged event.`);
+    }
+  });
+
+  // when audio ends, remove active state and log play event (if not logged yet)
   audioEl.addEventListener('ended', () => {
     btn.classList.remove('active');
     activeButton = null; // 활성 버튼 초기화
-    logPlayEvent(src); // Firestore에 재생 이벤트 로깅
 
-    // 로컬 저장소에도 백업 저장
-    const PLAY_COUNT_KEY = 'choir_play_counts';
-    const countsStr = localStorage.getItem(PLAY_COUNT_KEY);
-    const counts = countsStr ? JSON.parse(countsStr) : {};
-    counts[src] = (counts[src] || 0) + 1;
-    localStorage.setItem(PLAY_COUNT_KEY, JSON.stringify(counts));
+    // 60초 미만이라도 끝까지 들었으면 카운트 (짧은 곡일 경우)
+    // 단, 너무 짧은(예: 5초 미만) 건 실수로 눌렀을 수 있으니 제외하고 싶다면 조건 추가 가능
+    // 여기서는 "끝까지 들음"을 존중하여 카운트하되 중복만 방지
+    if (!hasLogged && audioEl.duration > 5) {
+      logPlayEvent(src);
+      saveLocalCount(src);
+      hasLogged = true;
+      console.log('Played to end, logged event.');
+    }
   });
 
   // when audio pauses, remove active state
@@ -225,6 +241,15 @@ function createOrTogglePlayer(btn) {
       activeButton = null; // 활성 버튼 초기화
     }
   });
+}
+
+// 로컬 저장소 카운트 업데이트 헬퍼 함수
+function saveLocalCount(src) {
+  const PLAY_COUNT_KEY = 'choir_play_counts';
+  const countsStr = localStorage.getItem(PLAY_COUNT_KEY);
+  const counts = countsStr ? JSON.parse(countsStr) : {};
+  counts[src] = (counts[src] || 0) + 1;
+  localStorage.setItem(PLAY_COUNT_KEY, JSON.stringify(counts));
 }
 
 function showError(container, err) {
